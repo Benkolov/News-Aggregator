@@ -25,4 +25,3 @@ class DnevnikScraper(BaseScraper):
             data.append({"title": title, "url": link, "image": image})
 
         return data
-
