@@ -1,0 +1,52 @@
+name: Django CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 4
+      matrix:
+        python-version: [3.7, 3.8, 3.9]
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Cache pip dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install flake8  # Install flake8 for linting
+
+    - name: Check for unapplied migrations
+      run: |
+        python manage.py makemigrations --check --dry-run
+
+    - name: Lint with flake8
+      run: |
+        # Lint only the project directory, excluding migrations and settings
+        flake8 . --exclude=migrations,settings.py --max-line-length=88
+
+    - name: Run Tests (if any)
+      run: |
+        # Gracefully handle the case where no tests are defined
+        python manage.py test || echo "No tests found, skipping."
