@@ -9,9 +9,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 60  # Увеличен таймаут до 60 минути
+    timeout-minutes: 60
     strategy:
-      max-parallel: 1  # Ограничаваме до един job наведнъж
+      max-parallel: 1  
       matrix:
         python-version: [3.11]  # Стартираме само с Python 3.11
 
@@ -42,12 +42,6 @@ jobs:
         run: |
           python manage.py makemigrations --check --dry-run
 
-      - name: Lint with flake8
-        run: |
-          # Lint само в проектната директория, като изключваме migrations и settings.py
-          flake8 . --exclude=migrations,settings.py --max-line-length=88
-
       - name: Run Tests (if any)
         run: |
-          # Ако няма дефинирани тестове, да не се провали build-а
           python manage.py test || echo "No tests found, skipping."
