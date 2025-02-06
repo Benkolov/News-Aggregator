@@ -1,9 +1,6 @@
 import requests
-from django.http import JsonResponse
 from concurrent.futures import ThreadPoolExecutor
-
 from django.shortcuts import render, redirect
-
 from news.models import Headline
 from news.scrapers.webcafe_scraper import WebcafeScraper
 from news.scrapers.dnevnik_scraper import DnevnikScraper
@@ -31,7 +28,6 @@ def scrape_multiple_sites(request):
     for scraper in scrapers:
         scraper.close()
 
-    # return JsonResponse({"status": "Scraping done", "articles": data})
     return redirect("home")
 
 def news_list(request):
