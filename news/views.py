@@ -2,6 +2,7 @@ import requests
 from concurrent.futures import ThreadPoolExecutor
 from django.shortcuts import render, redirect
 from news.models import Headline
+from news.scrapers.bbc_scraper import BBCScraper
 from news.scrapers.webcafe_scraper import WebcafeScraper
 from news.scrapers.dnevnik_scraper import DnevnikScraper
 
@@ -14,6 +15,7 @@ def scrape_multiple_sites(request):
     scrapers = [
         DnevnikScraper("https://www.dnevnik.bg"),
         WebcafeScraper("https://webcafe.bg/newscafe"),
+        BBCScraper("https://www.bbc.com/news"),
     ]
 
     data = []
