@@ -1,39 +1,47 @@
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from .base_scraper import BaseScraper
+import time
 
 
 class BBCScraper(BaseScraper):
     def parse(self):
         self.load_page()
-
-        WebDriverWait(self.driver, 10).until(
-            EC.presence_of_element_located((By.CLASS_NAME, "sc-93223220-0"))
-        )
-
-        articles = self.driver.find_elements(By.CLASS_NAME, "sc-93223220-0")
+        time.sleep(3)
+        
         data = []
-
-        for article in articles:
+        articles = self.driver.find_elements(By.CSS_SELECTOR, "div[data-testid$='-card']")
+        
+        for index, article in enumerate(articles[:6]):
             try:
-                title_elem = article.find_element(By.CSS_SELECTOR, '[data-testid="card-headline"]')
-                title = title_elem.text.strip()
-            except Exception as e:
-                title = ""
-            try:
-                link_elem = article.find_element(By.TAG_NAME, 'a')
-                link = link_elem.get_attribute('href')
-            except Exception as e:
-                link = ""
-
-            try:
-                image_elem = article.find_element(By.TAG_NAME, 'img')
-                image = image_elem.get_attribute('src')
-            except Exception as e:
-                image = ""
-
-            self.save_article(title, link, image)
-            data.append({"title": title, "url": link, "image": image})
-
+                try:
+                    title_element = article.find_element(By.CSS_SELECTOR, '[data-testid="card-headline"]')
+                    title = title_element.text.strip()
+                except Exception:
+                    title = ""
+                
+                try:
+                    link_element = article.find_element(By.TAG_NAME, 'a')
+                    link = link_element.get_attribute('href')
+                    
+                    if link and not link.startswith(('http', 'https')):
+                        link = f"https://www.bbc.com{link}"
+                except Exception:
+                    link = ""
+                
+                try:
+                    image_element = article.find_element(By.TAG_NAME, 'img')
+                    image = image_element.get_attribute('src')
+                    
+                    if not image and image_element.get_attribute('srcset'):
+                        srcset_parts = image_element.get_attribute('srcset').split(',')
+                        image = srcset_parts[0].strip().split(' ')[0]
+                except Exception:
+                    image = ""
+                
+                if title and link:
+                    self.save_article(title, link, image)
+                    data.append({"title": title, "url": link, "image": image})
+            except Exception:
+                continue
+        
         return data

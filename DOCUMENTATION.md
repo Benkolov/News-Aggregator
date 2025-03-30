@@ -70,7 +70,9 @@ news_aggregator/
 │   └── scrapers/
 │       ├── base_scraper.py
 │       ├── dnevnik_scraper.py
-│       └── webcafe_scraper.py
+│       ├── webcafe_scraper.py
+│       ├── bbc_scraper.py
+│       └── gong_scraper.py
 └── templates/
     └── news/
         └── home.html
@@ -83,6 +85,7 @@ The `Headline` model stores:
 - `title`: Article title (CharField)
 - `image`: Article image URL (URLField)
 - `url`: Article link (TextField)
+- `source`: News source name (CharField)
 
 #### Scrapers (`news/scrapers/`)
 - **Base Scraper**: Provides common functionality for all scrapers
@@ -90,22 +93,28 @@ The `Headline` model stores:
   - Page loading
   - Article saving
 - **Specific Scrapers**: Implement parsing logic for different news sites
-  - Dnevnik Scraper
-  - Webcafe Scraper
+  - Dnevnik Scraper: Bulgarian news from dnevnik.bg
+  - Webcafe Scraper: Articles from webcafe.bg
+  - BBC Scraper: International news from bbc.com
+  - Gong Scraper: Sports news from gong.bg
 
 #### Views (`news/views.py`)
 - `scrape_multiple_sites`: Concurrent scraping implementation
+- `scrape_single_source`: Individual source scraping
 - `news_list`: Displays aggregated news
 
 #### Templates (`templates/news/home.html`)
-Bootstrap-based responsive grid layout for news articles
+- Bootstrap-based responsive grid layout for news articles
+- Individual update buttons for each news source
+- Organized sections by news source
 
 ## 5. Usage and Contribution
 
 ### Using the Application
 1. Access the homepage to view current headlines
-2. Click "Get my morning news" to fetch fresh articles
-3. Click on headlines to read full articles on source websites
+2. Use "Get my morning news" to fetch all sources at once
+3. Use individual source buttons to update specific sources
+4. Click on headlines to read full articles on source websites
 
 ### Contributing
 1. Fork the repository
@@ -134,10 +143,12 @@ Areas for contribution:
    - Advanced filtering
    - Search functionality
    - User preferences
+   - Source categorization
 
 4. Performance Optimization
    - Caching implementation
    - Database query optimization
+   - Parallel scraping improvements
 
 ## 7. References
 

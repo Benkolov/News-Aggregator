@@ -12,7 +12,7 @@ class WebcafeScraper(BaseScraper):
         WebDriverWait(self.driver, 10).until(
             EC.presence_of_element_located((By.CLASS_NAME, "article"))
         )
-        articles = self.driver.find_elements(By.CLASS_NAME, "article")
+        articles = self.driver.find_elements(By.CLASS_NAME, "article")[:6]
 
         data = []
 
