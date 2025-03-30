@@ -1,113 +1,143 @@
-# News Aggregator
+# 📰 News Aggregator
 
-A Django-based web application that automatically scrapes and aggregates news articles from multiple sources using Selenium. This project provides a clean, user-friendly interface to view aggregated news content from various sources in one place.
+> Автоматизиран агрегатор на новини, изграден с Django и Selenium, който събира и представя новини от различни български и международни източници на едно място.
 
-## Features
+[![Django Version](https://img.shields.io/badge/Django-4.2+-green.svg)](https://www.djangoproject.com/)
+[![Python Version](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-- Automatic news scraping from multiple sources
-- Concurrent scraping implementation for better performance
-- Responsive design using Bootstrap
-- Modular scraper architecture for easy addition of new sources
-- PostgreSQL database for reliable data storage
-- Clean and intuitive user interface
+---
 
-## Project Overview
+## ✨ Основни характеристики
 
-### Architecture
+### 📱 Поддържани източници
+| Източник | Тип съдържание | Език |
+|----------|----------------|------|
+| Dnevnik.bg | Новини от България | 🇧🇬 BG |
+| Webcafe.bg | Статии и анализи | 🇧🇬 BG |
+| BBC.com | Международни новини | 🇬🇧 EN |
+| Gong.bg | Спортни новини | 🇧🇬 BG |
+
+### 🚀 Функционалности
+- ⚡ Паралелно извличане на новини за по-добра производителност
+- 🔄 Индивидуално обновяване по източник
+- 📱 Отзивчив дизайн с Bootstrap
+- 🔌 Модулна архитектура за лесно добавяне на нови източници
+- 🗄️ PostgreSQL база данни
+- 🎨 Изчистен и интуитивен интерфейс
+
+---
+
+## 🏗️ Архитектура на проекта
+
 ```
 news_aggregator/
-├── manage.py
-├── requirements.txt
-├── DOCUMENTATION.md
-├── news_aggregator/
-│   ├── settings.py
-│   ├── urls.py
-│   └── wsgi.py
-├── news/
-│   ├── models.py
-│   ├── views.py
-│   ├── urls.py
-│   └── scrapers/
-│       ├── base_scraper.py
-│       ├── dnevnik_scraper.py
-│       └── webcafe_scraper.py
-└── templates/
-    └── news/
-        └── home.html
+├── 📄 manage.py
+├── 📋 requirements.txt
+├── 📚 DOCUMENTATION.md
+├── 📁 news_aggregator/
+│   ├── ⚙️ settings.py
+│   ├── 🔗 urls.py
+│   └── 🌐 wsgi.py
+├── 📁 news/
+│   ├── 📊 models.py
+│   ├── 👀 views.py
+│   ├── 🔗 urls.py
+│   └── 📁 scrapers/
+│       ├── 🔧 base_scraper.py
+│       ├── 📰 dnevnik_scraper.py
+│       ├── 📰 webcafe_scraper.py
+│       ├── 📰 bbc_scraper.py
+│       └── 📰 gong_scraper.py
+└── 📁 templates/
+    └── 📁 news/
+        └── 🎨 home.html
 ```
 
-### Key Components
-- `news/models.py`: Defines the data structure for news articles
-- `news/views.py`: Contains core functionality and controller logic
-- `news/scrapers/`: Houses modular scraping implementations
-- `templates/news/home.html`: Frontend template for displaying news
+### 🔑 Основни компоненти
+- `📊 models.py`: Структура на данните за новините
+- `👀 views.py`: Основна логика и контролери
+- `🔧 scrapers/`: Модули за извличане на данни от всеки източник
+- `🎨 templates/`: Шаблони за визуализация
 
-## Requirements
+---
 
-- Python 3.x
-- Django
-- Selenium
-- PostgreSQL
-- Bootstrap
+## 📋 Изисквания
 
-For a complete list of dependencies, please refer to `requirements.txt`.
+### 🛠️ Технически изисквания
+- ![Python](https://img.shields.io/badge/Python-3.8+-blue)
+- ![Django](https://img.shields.io/badge/Django-4.2+-green)
+- ![Selenium](https://img.shields.io/badge/Selenium-4.0+-yellow)
+- ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-13.0+-blue)
+- ![Bootstrap](https://img.shields.io/badge/Bootstrap-5.0+-purple)
+- ![BeautifulSoup4](https://img.shields.io/badge/BeautifulSoup4-latest-orange)
+- ![Requests](https://img.shields.io/badge/Requests-latest-red)
 
-## Installation and Setup
+> 📝 За пълен списък на зависимостите, вижте `requirements.txt`
 
-1. Clone the repository:
+---
+
+## 🚀 Инсталация и настройка
+
+### 1️⃣ Клониране на хранилището
 ```bash
 git clone <repository-url>
 cd news-aggregator
 ```
 
-2. Create and activate virtual environment:
+### 2️⃣ Създаване на виртуална среда
 ```bash
 python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+source venv/bin/activate  # За Windows: venv\Scripts\activate
 ```
 
-3. Install dependencies:
+### 3️⃣ Инсталиране на зависимостите
 ```bash
 pip install -r requirements.txt
 ```
 
-4. Configure PostgreSQL:
-- Ensure PostgreSQL is installed and running
-- Update database settings in `news_aggregator/settings.py` if needed
-
-5. Run migrations:
+### 4️⃣ Настройка на базата данни
+- ✅ Уверете се, че PostgreSQL е инсталиран и работи
+- ⚙️ Актуализирайте настройките в `settings.py` при нужда
+- 🔄 Изпълнете миграциите:
 ```bash
 python manage.py migrate
 ```
 
-6. Start the development server:
+### 5️⃣ Стартиране на сървъра
 ```bash
 python manage.py runserver
 ```
 
-## Usage
+---
 
-1. Access the application at `http://localhost:8000`
-2. Click "Get my morning news" to trigger the scraping process
-3. Browse through the aggregated news articles
-4. Click on headlines to read full articles on their source websites
+## 📖 Използване
 
-## Contributing
+1. 🌐 Отворете `http://localhost:8000` в браузъра
+2. 🔄 Изберете начин за обновяване:
+   - 📰 "Вземи всички новини" за всички източници
+   - 🎯 Използвайте бутоните за конкретен източник
+3. 📱 Разгледайте новините по категории
+4. 🔗 Кликнете върху заглавие за пълната статия
 
-We welcome contributions! Here's how you can help:
+---
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+## 🤝 Принос към проекта
 
-### Areas for Contribution
-- New scrapers for additional news sources
-- UI/UX improvements
-- Documentation updates
-- Test coverage expansion
-- Performance optimizations
+### Как да допринесете
+1. 🍴 Направете Fork на проекта
+2. 🌿 Създайте feature branch (`git checkout -b feature/ИмеНаФункцията`)
+3. ✍️ Направете промените
+4. 📤 Публикувайте branch-a (`git push origin feature/ИмеНаФункцията`)
+5. 📫 Отворете Pull Request
+
+### 🎯 Области за принос
+- 🔌 Нови скрейпъри за допълнителни източници
+- 🎨 Подобрения на потребителския интерфейс
+- 📚 Обновяване на документацията
+- ✅ Разширяване на тестовото покритие
+- ⚡ Оптимизации на производителността
+- 🌍 Многоезична поддръжка
 
 ## Testing
 
@@ -122,7 +152,9 @@ tests/
 │   └── test_scrapers/
 │       ├── test_base_scraper.py
 │       ├── test_dnevnik_scraper.py
-│       └── test_webcafe_scraper.py
+│       ├── test_webcafe_scraper.py
+│       ├── test_bbc_scraper.py
+│       └── test_gong_scraper.py
 ├── integration/
 │   └── test_scraping_workflow.py
 └── e2e/
