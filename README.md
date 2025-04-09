@@ -76,7 +76,7 @@ news_aggregator/
 
 ### 1️⃣ Clone the Repository
 ```bash
-git clone <repository-url>
+git clone https://github.com/Benkolov/News-Aggregator.git
 cd news-aggregator
 ```
 
@@ -113,33 +113,6 @@ python manage.py runserver
 3. Browse news by categories
 4. Click on a headline to read the full article
 
-## 🧪 Testing
-
-The project includes a comprehensive test suite covering unit tests, integration tests, and end-to-end tests.
-
-```bash
-# Run all tests
-python manage.py test
-
-# Run with coverage
-coverage run manage.py test
-coverage report
-```
-
-## 🔮 Future Enhancements
-
-1. **Error Handling and Logging**
-   - Comprehensive error handling system
-   - Logging system for debugging
-
-2. **UI/UX Improvements**
-   - Advanced filtering options
-   - Search functionality
-   - User preferences
-
-3. **Performance Optimization**
-   - Caching implementation
-   - Database query optimization
 
 ## 📚 Documentation
 
