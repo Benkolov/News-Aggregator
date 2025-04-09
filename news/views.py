@@ -13,9 +13,9 @@ def scrape_multiple_sites(request):
     session.headers.update(headers)
 
     scrapers = [
+        BBCScraper("https://www.bbc.com/news", "BBC"),
         DnevnikScraper("https://www.dnevnik.bg/novini/dnes/", "Dnevnik"),
         WebcafeScraper("https://webcafe.bg/newscafe", "Webcafe"),
-        BBCScraper("https://www.bbc.com/news", "BBC"),
         GongScraper("https://gong.bg/", "Gong"),
     ]
 

@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>News Aggregator - Вашият източник на новини</title>
+    <title>News Aggregator - Your news source</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
@@ -19,14 +19,14 @@
 
     <div class="jumbotron">
         <div class="container text-center">
-            <h1 class="display-4">Добре дошли в News Aggregator</h1>
-            <p class="lead">Вашият персонален източник на новини от множество сайтове</p>
+            <h1 class="display-4">Welcome to News Aggregator</h1>
+            <p class="lead">Your personal news source from multiple sites</p>
             <div class="scrape-buttons">
-                <a href="{% url 'scrape' %}" class="btn btn-light btn-lg">Вземи всички новини</a>
-                <a href="{% url 'scrape_source' 'dnevnik' %}" class="btn btn-light btn-lg">Обнови Дневник</a>
-                <a href="{% url 'scrape_source' 'webcafe' %}" class="btn btn-light btn-lg">Обнови Webcafe</a>
-                <a href="{% url 'scrape_source' 'bbc' %}" class="btn btn-light btn-lg">Обнови BBC</a>
-                <a href="{% url 'scrape_source' 'gong' %}" class="btn btn-light btn-lg">Обнови Gong</a>
+                <a href="{% url 'scrape' %}" class="btn btn-light btn-lg">Get all the news</a>
+                <a href="{% url 'scrape_source' 'dnevnik' %}" class="btn btn-light btn-lg">Update Dnevnik</a>
+                <a href="{% url 'scrape_source' 'webcafe' %}" class="btn btn-light btn-lg">Update Webcafe</a>
+                <a href="{% url 'scrape_source' 'bbc' %}" class="btn btn-light btn-lg">Update BBC</a>
+                <a href="{% url 'scrape_source' 'gong' %}" class="btn btn-light btn-lg">Update Gong</a>
             </div>
         </div>
     </div>
@@ -53,7 +53,7 @@
                         {% else %}
                             <div class="col-12">
                                 <div class="empty-section">
-                                    <p>Все още няма новини от {{ source }}. Натиснете бутона "Обнови {{ source }}" горе, за да вземете последните новини.</p>
+                                    <p>There is no news from {{ source }} yet. Click the "Update {{ source }}" button above to get the latest news.</p>
                                 </div>
                             </div>
                         {% endif %}
@@ -65,7 +65,7 @@
 
     <footer class="mt-5">
         <div class="container text-center">
-            <p>&copy; 2024 News Aggregator. Всички права запазени.</p>
+            <p>&copy; 2024 News Aggregator. All rights reserved.</p>
         </div>
     </footer>
 
